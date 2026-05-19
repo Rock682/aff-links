@@ -1,0 +1,45 @@
+import Link from "next/link";
+import { offers } from "@/data/offers";
+
+const calculators = ["EMI", "SIP", "FD", "GST", "Tax", "Salary", "Retirement", "Compound Interest"];
+
+export default function HomePage() {
+  return (
+    <div className="space-y-10">
+      <section className="glass rounded-3xl p-8">
+        <p className="text-sm uppercase tracking-widest text-brand">India Finance Intelligence</p>
+        <h1 className="mt-3 text-4xl font-bold">Compare Credit Cards, Loans, Demat & Finance Apps</h1>
+        <p className="mt-3 text-slate-600 dark:text-slate-300">Built for Indian students, salaried employees, freelancers and business owners. Trusted, transparent and conversion-focused.</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href="/comparisons" className="rounded-full bg-brand px-5 py-3 text-white">Start Comparing</Link>
+          <Link href="/calculators" className="rounded-full border px-5 py-3">Use Calculators</Link>
+          <Link href="/blog" className="rounded-full border px-5 py-3">Read Guides</Link>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="mb-4 text-2xl font-semibold">Trending Finance Offers</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {offers.map((offer) => (
+            <article key={offer.name} className="glass rounded-2xl p-5">
+              <span className="rounded-full bg-brand/10 px-2 py-1 text-xs text-brand">{offer.badge}</span>
+              <h3 className="mt-2 text-xl font-semibold">{offer.name}</h3>
+              <p className="text-sm">{offer.category} • ⭐ {offer.rating}</p>
+              <ul className="mt-2 list-disc pl-5 text-sm text-slate-600 dark:text-slate-300">
+                {offer.pros.map((pro) => <li key={pro}>{pro}</li>)}
+              </ul>
+              <a href={offer.affiliateUrl} target="_blank" rel="nofollow sponsored noopener" className="mt-4 inline-block rounded-lg bg-brand px-4 py-2 text-white">{offer.cta}</a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="glass rounded-2xl p-6">
+        <h2 className="text-2xl font-semibold">Finance Calculators</h2>
+        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {calculators.map((item) => <span key={item} className="rounded-xl border p-3 text-sm">{item} Calculator</span>)}
+        </div>
+      </section>
+    </div>
+  );
+}
